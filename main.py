@@ -5,7 +5,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 
-current_dir = dirname(abspath(__file__))
+current_dir = dirname(abspath(__file__)) 
 wellknown_path = join(current_dir, ".well-known")
 historical_data = join(current_dir, "weather.json")
 
@@ -34,6 +34,31 @@ def countries():
 @app.get('/countries/{country}/{city}/{month}')
 def monthly_average(country: str, city: str, month: str):
     return data[country][city][month]
+
+@app.get('/countries/{country}/cities')
+def get_cities(country: str) -> list[str]:
+    """
+    Retrieve the list of cities for a given country/region.
+
+    Parameters:
+    country (str): The name of the country or region.
+
+    Returns:
+    list[str]: A list of city names within the specified country.
+
+    Raises:
+    KeyError: If the country is not found in the dataset.
+
+    Edge Cases:
+    - If the country does not exist, a 404 error is returned.
+    - If the country exists but has no cities, an empty list is returned.
+    """
+    try:
+        return list(data[country].keys())
+    except KeyError:
+        # Return a 404 error if the country is not found
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail=f"Country '{country}' not found.")
 
 # Generate the OpenAPI schema:
 openapi_schema = app.openapi()

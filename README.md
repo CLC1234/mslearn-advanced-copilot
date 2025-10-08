@@ -11,6 +11,7 @@ Gain more practical experience by using this repository that contains a Python W
 1. Enable your [GitHub Copilot service](https://github.com/github-copilot/signup)
 1. Open [this repository with Codespaces](https://codespaces.new/MicrosoftDocs/mslearn-copilot-codespaces-python)
 
+
 ## 💪🏽 Exercise
 The current API is not exposing country/{country} which needs to be implemented to list cities. The route should allow only GET HTTP requests with a JSON response providing information from the historical high and low for that country, city, and given month.
 
@@ -77,3 +78,52 @@ Privacy information can be found at https://privacy.microsoft.com/en-us/
 
 Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents,
 or trademarks, whether by implication, estoppel or otherwise.
+
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+### 1. Clone the repository
+
+```sh
+git clone https://github.com/MicrosoftDocs/mslearn-advanced-copilot.git
+cd mslearn-advanced-copilot
+```
+
+### 2. Build and start the development container
+
+If using [GitHub Codespaces](https://github.com/features/codespaces) or VS Code Dev Containers, open the project in your Codespace or with the "Reopen in Container" command in VS Code. The environment will be set up automatically.
+
+Alternatively, you can use Docker:
+
+```sh
+docker build -t travel-weather-api .
+docker run -p 8000:8000 travel-weather-api
+```
+
+### 3. Run locally (without Docker)
+
+Make sure you have Python 3.10+ installed.
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+### 4. Access the API
+
+Open your browser and go to [http://localhost:8000/docs](http://localhost:8000/docs) to view the interactive API documentation.
+
+### 5. Run tests
+
+To run the unit tests:
+
+```sh
+python -m unittest discover
+```
+
+---
